@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import importlib.util
+import sys
 from pathlib import Path
 import unittest
 
@@ -8,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "software" / "linux-helper" / "tinytouch_protocol.py"
 SPEC = importlib.util.spec_from_file_location("tinytouch_protocol", PATH)
 protocol = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = protocol
 assert SPEC.loader is not None
 SPEC.loader.exec_module(protocol)
 
