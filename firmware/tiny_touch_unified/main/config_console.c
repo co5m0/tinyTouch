@@ -14,6 +14,7 @@
 #include "tusb.h"
 
 #include "device_config.h"
+#include "ble_transport.h"
 #include "fingerprint.h"
 #include "firmware_update.h"
 #include "piv.h"
@@ -69,6 +70,9 @@ static bool cdc_write_all(const char *data, size_t length, int64_t deadline) {
 
 void config_console_send_line(const char *line) {
   if (!line) return;
+  if (strncmp(line, "EV ", 3) == 0 || strncmp(line, "EV2 ", 4) == 0) {
+    (void)ble_transport_send_line(line);
+  }
   if (write_lock) xSemaphoreTake(write_lock, portMAX_DELAY);
   int64_t deadline = esp_timer_get_time() + CDC_WRITE_TIMEOUT_US;
   bool sent = cdc_write_all(line, strlen(line), deadline);
