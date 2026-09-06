@@ -97,11 +97,15 @@ async def run(device_selector: str | None, once: bool) -> None:
                 if event is None or event.nonce in seen:
                     continue
                 reply = encrypt_password(pairing_key, event, password)
-                seen.append(event.nonce)
-                save_seen(seen)
-                asyncio.create_task(send_line(reply))
-                if once:
-                    finished.set()
+
+                async def deliver() -> None:
+                    await send_line(reply)
+                    seen.append(event.nonce)
+                    save_seen(seen)
+                    if once:
+                        finished.set()
+
+                asyncio.create_task(deliver())
 
         await client.start_notify(TX_UUID, notification)
         if once:
