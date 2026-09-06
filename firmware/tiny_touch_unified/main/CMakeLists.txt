@@ -1,6 +1,7 @@
 idf_component_register(
   SRCS
     "main.c"
+    "ble_transport.c"
     "config_console.c"
     "device_config.c"
     "fingerprint.c"
@@ -10,7 +11,7 @@ idf_component_register(
     "usb_ccid.c"
     "usb_descriptors.c"
   INCLUDE_DIRS "."
-  REQUIRES app_update driver esp_timer esp_tinyusb mbedtls nvs_flash
+  REQUIRES app_update bt driver esp_timer esp_tinyusb mbedtls nvs_flash
   PRIV_REQUIRES esp_driver_uart
 )
 

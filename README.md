@@ -255,3 +255,10 @@ do not commit:
 <img width="2261" height="1347" alt="render2" src="https://github.com/user-attachments/assets/5f107d74-d651-4e3b-90ed-f37dcaa026ac" />
 <img width="1238" height="901" alt="cross" src="https://github.com/user-attachments/assets/6a7062d9-ec56-4aac-adad-00d888e7d486" />
 <img width="1280" height="957" alt="tinyTouch" src="https://github.com/user-attachments/assets/ad66c9b3-5823-44d3-bd73-bba64f2e60ab" />
+
+
+## XIAO ESP32-S3 battery + Linux BLE prototype
+
+The `feature/xiao-ble-linux` work adds a second authenticated HID transport over BLE while preserving USB CDC/HID/CCID. It targets the Seeed Studio XIAO ESP32-S3 + ZW101-style sensor + single-cell LiPo build.
+
+See [docs/xiao-ble-linux.md](docs/xiao-ble-linux.md) for wiring, Linux helper setup, UUIDs, security model, and current battery/power-management status.

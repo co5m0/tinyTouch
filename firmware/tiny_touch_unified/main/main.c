@@ -3,6 +3,7 @@
 #include "nvs_flash.h"
 
 #include "config_console.h"
+#include "ble_transport.h"
 #include "device_config.h"
 #include "fingerprint.h"
 #include "piv.h"
@@ -20,6 +21,7 @@ void app_main(void) {
   piv_init();
   usb_ccid_start(piv_handle_apdu);
   config_console_start();
+  ble_transport_start();
   touch_pin_hid_start();
   // All persistent state and runtime services initialized successfully. Keep
   // this OTA slot across later power cycles instead of rolling back once.
